@@ -25,15 +25,15 @@ class Post
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $фгеauthor;
+    private $author;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $updated_at;
 
@@ -47,11 +47,18 @@ class Post
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -59,51 +66,84 @@ class Post
         return $this;
     }
 
-    public function getфгеauthor(): ?string
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
     {
-        return $this->фгеauthor;
+        return $this->author;
     }
 
-    public function setфгеauthor(string $фгеauthor): self
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author): void
     {
-        $this->фгеauthor = $фгеauthor;
-
-        return $this;
+        $this->author = $author;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    /**
+     * @param \DateTimeInterface $created_at
+     * @return $this
+     */
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
+    /**
+     * @param \DateTimeInterface $updated_at
+     * @return $this
+     */
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
         return $this;
     }
 
+    /**
+     * @return Blog|null
+     */
     public function getBlog(): ?Blog
     {
         return $this->blog;
     }
 
+    /**
+     * @param Blog|null $blog
+     * @return $this
+     */
     public function setBlog(?Blog $blog): self
     {
         $this->blog = $blog;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

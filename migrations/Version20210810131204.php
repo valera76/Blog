@@ -57,7 +57,7 @@ final class Version20210810131204 extends AbstractMigration
         $this->addSql('CREATE TABLE post (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name CLOB NOT NULL, фгеauthor VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         , updated_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         )');
-        $this->addSql('INSERT INTO post (id, name, фгеauthor, created_at, updated_at) SELECT id, name, фгеauthor, created_at, updated_at FROM __temp__post');
+        $this->addSql('INSERT INTO post (id, name, author, created_at, updated_at) SELECT id, name, фгеauthor, created_at, updated_at FROM __temp__post');
         $this->addSql('DROP TABLE __temp__post');
     }
 }
