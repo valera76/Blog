@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,15 +43,20 @@ class Post
      */
     private $blog;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column (type="string", length=255, unique=true)
+     */
+    private $slug;
+
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -67,34 +73,37 @@ class Post
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
     /**
-     * @param mixed $author
+     * @param string $author
+     * @return $this
      */
-    public function setAuthor($author): void
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return DateTimeInterface
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->created_at;
     }
 
     /**
-     * @param \DateTimeInterface $created_at
+     * @param DateTimeInterface $created_at
      * @return $this
      */
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -102,18 +111,18 @@ class Post
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): DateTimeInterface
     {
         return $this->updated_at;
     }
 
     /**
-     * @param \DateTimeInterface $updated_at
+     * @param DateTimeInterface $updated_at
      * @return $this
      */
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
@@ -121,20 +130,40 @@ class Post
     }
 
     /**
-     * @return Blog|null
+     * @return Blog
      */
-    public function getBlog(): ?Blog
+    public function getBlog(): Blog
     {
         return $this->blog;
     }
 
     /**
-     * @param Blog|null $blog
+     * @param Blog $blog
      * @return $this
      */
-    public function setBlog(?Blog $blog): self
+    public function setBlog(Blog $blog): self
     {
         $this->blog = $blog;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return $this
+     */
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
