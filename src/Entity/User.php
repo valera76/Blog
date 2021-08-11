@@ -152,7 +152,7 @@ class User
     /**
      * @return DateTimeInterface
      */
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
@@ -161,7 +161,7 @@ class User
      * @param DateTimeInterface $created_at
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -171,7 +171,7 @@ class User
     /**
      * @return DateTimeInterface
      */
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
@@ -180,7 +180,7 @@ class User
      * @param DateTimeInterface $updated_at
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 

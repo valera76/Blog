@@ -94,7 +94,7 @@ class Post
     /**
      * @return DateTimeInterface
      */
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
@@ -103,7 +103,7 @@ class Post
      * @param DateTimeInterface $created_at
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -113,7 +113,7 @@ class Post
     /**
      * @return DateTimeInterface
      */
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
@@ -122,7 +122,7 @@ class Post
      * @param DateTimeInterface $updated_at
      * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
@@ -132,7 +132,7 @@ class Post
     /**
      * @return Blog
      */
-    public function getBlog(): Blog
+    public function getBlog(): ?Blog
     {
         return $this->blog;
     }
@@ -141,7 +141,7 @@ class Post
      * @param Blog $blog
      * @return $this
      */
-    public function setBlog(Blog $blog): self
+    public function setBlog(?Blog $blog): self
     {
         $this->blog = $blog;
 
