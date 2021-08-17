@@ -19,6 +19,7 @@ class BlogCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titlename'),
+            TextField::new('picture'),
             DateField::new('created_at'),
             DateField::new('updated_at'),
             AssociationField::new('user')->autocomplete(),

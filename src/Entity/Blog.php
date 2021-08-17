@@ -42,18 +42,23 @@ class Blog
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="blog", orphanRemoval=true)
+     * @ORM\Column (type="string", length=255, unique=true)
      */
-    private $post;
+    private $picture;
 
     /**
      * @ORM\Column (type="string", length=255, unique=true)
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="blog", orphanRemoval=true)
+     */
+    private $posts;
+
     public function __construct()
     {
-        $this->post = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): int
@@ -138,35 +143,20 @@ class Blog
     }
 
     /**
-     * @return Collection|Post[]
+     * @return string
      */
-    public function getPost(): Collection
+    public function getPicture(): string
     {
-        return $this->post;
-    }
-
-    public function addPost(Post $post): self
-    {
-        if (!$this->post->contains($post)) {
-            $this->post[] = $post;
-            $post->setBlog($this);
-        }
-
-        return $this;
+        return $this->picture;
     }
 
     /**
-     * @param Post $post
+     * @param string $picture
      * @return $this
      */
-    public function removePost(Post $post): self
+    public function setPicture(string $picture): self
     {
-        if ($this->post->removeElement($post)) {
-            // set the owning side to null (unless already changed)
-            if ($post->getBlog() === $this) {
-                $post->setBlog(null);
-            }
-        }
+        $this->picture = $picture;
 
         return $this;
     }
@@ -186,6 +176,35 @@ class Blog
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setBlog($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Post $post
+     * @return $this
+     */
+    public function removePost(Post $post): self
+    {
+        $this->posts->removeElement($post);
 
         return $this;
     }

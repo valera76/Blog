@@ -1,20 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}Blog Post{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 mb-5 mb-log-0">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <section id="hero" class="d-flex align-items-center">
+                    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <h1>Bettter digital experience with Presento</h1>
+                                <h2>We are team of talented designers making websites with Bootstrap</h2>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/valera/flash/Test/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/valera/flash/Test/templates/index/index.html.twig'|file_link(0) }}">templates/index/index.html.twig</a></code></li>
-    </ul>
-</div>
+        </div>
+    </div>
 {% endblock %}

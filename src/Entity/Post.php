@@ -29,6 +29,11 @@ class Post
     private $author;
 
     /**
+     * @ORM\Column (type="string", length=255, unique=true)
+     */
+    private $picture;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -39,14 +44,14 @@ class Post
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Blog::class, inversedBy="post")
-     */
-    private $blog;
-
-    /**
      * @ORM\Column (type="string", length=255, unique=true)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Blog::class, inversedBy="post")
+     */
+    private $blog;
 
     public function getId(): int
     {
@@ -87,6 +92,26 @@ class Post
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicture(): string
+    {
+        return $this->picture;
+    }
+
+
+    /**
+     * @param string $picture
+     * @return $this
+     */
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
