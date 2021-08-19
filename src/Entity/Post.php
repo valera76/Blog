@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,12 +26,12 @@ class Post
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $author;
 
     /**
-     * @ORM\Column (type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $picture;
 
@@ -50,9 +52,23 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity=Blog::class, inversedBy="post")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $blog;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="post", orphanRemoval=true)
+     */
+    private $commentaries;
+
+    public function __construct()
+    {
+        $this->commentaries = new ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
@@ -104,7 +120,6 @@ class Post
         return $this->picture;
     }
 
-
     /**
      * @param string $picture
      * @return $this
@@ -155,6 +170,25 @@ class Post
     }
 
     /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return $this
+     */
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
      * @return Blog
      */
     public function getBlog(): ?Blog
@@ -174,21 +208,34 @@ class Post
     }
 
     /**
-     * @return string
+     * @return Collection|Commentary[]
      */
-    public function getSlug(): string
+    public function getCommentaries(): Collection
     {
-        return $this->slug;
+        return $this->commentaries;
     }
 
     /**
-     * @param string $slug
-     *
+     * @param Commentary $commentary
      * @return $this
      */
-    public function setSlug(string $slug): self
+    public function addCommentary(Commentary $commentary): self
     {
-        $this->slug = $slug;
+        if (!$this->commentaries->contains($commentary)) {
+            $this->commentaries[] = $commentary;
+            $commentary->setPost($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Commentary $commentary
+     * @return $this
+     */
+    public function removeCommentary(Commentary $commentary): self
+    {
+        $this->commentaries->removeElement($commentary);
 
         return $this;
     }

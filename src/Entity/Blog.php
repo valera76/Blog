@@ -26,10 +26,9 @@ class Blog
     private $titlename;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="blog")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column (type="string", length=255, unique=true)
      */
-    private $user;
+    private $picture;
 
     /**
      * @ORM\Column(type="datetime")
@@ -44,12 +43,13 @@ class Blog
     /**
      * @ORM\Column (type="string", length=255, unique=true)
      */
-    private $picture;
+    private $slug;
 
     /**
-     * @ORM\Column (type="string", length=255, unique=true)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="blog")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $slug;
+    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="blog", orphanRemoval=true)
@@ -86,20 +86,20 @@ class Blog
     }
 
     /**
-     * @return User
+     * @return string
      */
-    public function getUser(): ?User
+    public function getPicture(): string
     {
-        return $this->user;
+        return $this->picture;
     }
 
     /**
-     * @param User $user
+     * @param string $picture
      * @return $this
      */
-    public function setUser(?User $user): self
+    public function setPicture(string $picture): self
     {
-        $this->user = $user;
+        $this->picture = $picture;
 
         return $this;
     }
@@ -145,25 +145,6 @@ class Blog
     /**
      * @return string
      */
-    public function getPicture(): string
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @param string $picture
-     * @return $this
-     */
-    public function setPicture(string $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getSlug(): string
     {
         return $this->slug;
@@ -181,6 +162,25 @@ class Blog
     }
 
     /**
+     * @return User
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return $this
+     */
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
      * @return Collection|Post[]
      */
     public function getPosts(): Collection
@@ -188,6 +188,10 @@ class Blog
         return $this->posts;
     }
 
+    /**
+     * @param Post $post
+     * @return $this
+     */
     public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {

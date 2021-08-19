@@ -12,7 +12,6 @@
                 <div class="container">
                     <ol>
                         <li><a href="/index">Home</a></li>
-                        <li>Blog</li>
                     </ol>
                     <h2>Blog</h2>
                 </div>
@@ -26,8 +25,8 @@
                     {% for blog in blogs %}
                     <article class="entry">
                          <div class="entry-img">
-                                    <img src="{{ blog.picture }}" alt="" class="img-fluid">
-                                </div>
+                             <img src="{{ blog.picture }}" alt="" class="img-fluid">
+                         </div>
                          <h2 class="entry-title">
                              <a href="/blog/{{ blog.slug }}">{{ blog.titlename }}</a>
                          </h2>
@@ -51,7 +50,7 @@
 
                     <div class="blog-pagination">
                         <ul class="justify-content-center">
-                            <li><a href="#">1</a></li>
+                            <li><li>Post</li><a href="#">1</a></li>
                             <li class="active"><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
                         </ul>

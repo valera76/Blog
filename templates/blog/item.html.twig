@@ -11,9 +11,8 @@
                 <section class="breadcrumbs">
                     <div class="container">
                         <ol>
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/index">Home</a></li>
                             <li><a href="/blog">Blog</a></li>
-                            <li>Post</li>
                         </ol>
                         <h2>Blog </h2>
                     </div>
@@ -26,10 +25,10 @@
 
                         <article class="entry entry-single">
                             <div class="entry-img">
-                                    <img src="{{ blog.picture }}" alt="" class="img-fluid">
+                                <img src="{{ blog.picture }}" alt="" class="img-fluid">
                             </div>
                             <h2 class="entry-title">
-                                <a href="#">{{ blog.titlename }}</a>
+                                <a href="/blog">{{ blog.titlename }}</a>
                             </h2>
                             <div class="entry-meta">
                                 <ul>
@@ -50,7 +49,9 @@
                         <div class="col-lg-10 mb-5 mb-log-0">
                             <article class="entry entry-single">
                                 <div class="entry-img">
-                                    <img src="{{ post.picture }}" alt="" class="img-fluid">
+                                    <p style="text-align: center;">
+                                        <img src="{{ post.picture }}" alt="" class="img-fluid">
+                                    </p>
                                 </div>
                                 <h2 class="entry-title">
                                     <a href="/post/{{ post.slug }}">{{ post.name }}</a>
